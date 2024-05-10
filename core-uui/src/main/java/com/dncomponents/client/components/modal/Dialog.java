@@ -1,0 +1,244 @@
+/*
+ * Copyright 2024 dncomponents
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.dncomponents.client.components.modal;
+
+import com.dncomponents.client.components.core.AbstractPluginHelper;
+import com.dncomponents.client.components.core.BaseComponent;
+import com.dncomponents.client.components.core.ComponentHtmlParser;
+import com.dncomponents.client.components.core.events.HandlerRegistration;
+import com.dncomponents.client.components.core.events.hide.HasHideHandlers;
+import com.dncomponents.client.components.core.events.hide.HideEvent;
+import com.dncomponents.client.components.core.events.hide.HideHandler;
+import com.dncomponents.client.components.core.events.show.HasShowHandlers;
+import com.dncomponents.client.components.core.events.show.ShowEvent;
+import com.dncomponents.client.components.core.events.show.ShowHandler;
+import com.dncomponents.client.dom.DomUtil;
+import com.dncomponents.client.dom.handlers.ClickHandler;
+import com.dncomponents.client.views.Renderer;
+import com.dncomponents.client.views.Ui;
+import com.dncomponents.client.views.core.ui.modal.DialogView;
+import com.dncomponents.client.views.core.ui.modal.DialogViewSlots;
+import org.teavm.jso.dom.html.HTMLElement;
+import org.teavm.jso.dom.xml.NodeList;
+
+import java.util.Collections;
+import java.util.Map;
+
+
+public class Dialog<T> extends BaseComponent<T, DialogView> implements HasShowHandlers, HasHideHandlers {
+
+    private boolean backdrop = true;
+    private boolean closeOnEscape = true;
+    private boolean draggable = true;
+
+    public Dialog() {
+        this(Ui.get().getModalDialogView());
+        bind();
+    }
+
+    public Dialog(DialogView view) {
+        super(view);
+        bind();
+    }
+
+    private void bind() {
+        view.addCloseHandler(this::hide);
+        setBackdrop(backdrop);
+        setCloseOnEscape(closeOnEscape);
+        setDraggable(draggable);
+    }
+
+    public void show() {
+        DomUtil.addToBody(this);
+        view.show();
+        ShowEvent.fire(this, this);
+    }
+
+    public void hide() {
+        view.hide();
+        DomUtil.removeElement(this.asElement());
+        HideEvent.fire(this, this);
+    }
+
+    public void setWidth(String width) {
+        view.setWidth(width);
+    }
+
+    public void setHeight(String height) {
+        view.setHeight(height);
+    }
+
+    @Override
+    protected DialogView getView() {
+        return super.getView();
+    }
+
+    @Override
+    public HandlerRegistration addShowHandler(ShowHandler handler) {
+        return handler.addTo(asElement());
+    }
+
+    @Override
+    public HandlerRegistration addHideHandler(HideHandler handler) {
+        return handler.addTo(asElement());
+    }
+
+    public interface ModalRenderer<T> extends Renderer<T, DialogViewSlots> {
+    }
+
+    public void setRenderer(ModalRenderer<T> renderer) {
+        super.setRendererBase(renderer);
+    }
+
+    public void setHeader(SetElement se) {
+        se.setHtml(getView().getViewSlots().getHeaderPanel());
+    }
+
+    public void setContent(SetElement se) {
+        se.setHtml(getView().getViewSlots().getContentPanel());
+    }
+
+    public void setHeader(String header) {
+        setHeader(se -> se.setTextContent(header));
+    }
+
+    public void setContent(String content) {
+        setContent(se -> se.setTextContent(content));
+    }
+
+    public void setFooter(SetElement se) {
+        se.setHtml(getView().getViewSlots().getFooterPanel());
+    }
+
+    public void setBackdrop(boolean backdrop) {
+        this.backdrop = backdrop;
+        view.setBackDrop(backdrop);
+    }
+
+    public void setCloseOnEscape(boolean closeOnEscape) {
+        this.closeOnEscape = closeOnEscape;
+        view.setCloseOnEscape(closeOnEscape);
+    }
+
+    public void setDraggable(boolean draggable) {
+        this.draggable = draggable;
+        view.setDraggable(draggable);
+    }
+
+    public void addOKHandler(ClickHandler clickHandler, String text) {
+        view.addOkHandler(clickHandler, text);
+    }
+
+    public boolean isDraggable() {
+        return draggable;
+    }
+
+    public boolean isBackdrop() {
+        return backdrop;
+    }
+
+    public boolean isCloseOnEscape() {
+        return closeOnEscape;
+    }
+
+    public void setPosition(int top, int left) {
+        view.setPosition(top, left);
+    }
+
+    public int getTopPosition() {
+        return view.getTopPosition();
+    }
+
+    public int getLeftPosition() {
+        return view.getLeftPosition();
+    }
+
+    public static <T> Dialog<T> show(String title, String content) {
+        Dialog dialog = new Dialog();
+        dialog.setHeader(title);
+        dialog.setContent(content);
+        dialog.show();
+        return dialog;
+    }
+
+    public static <T> Dialog<T> show(String content) {
+        return show("", content);
+    }
+
+    public static class ModalDialogHtmlParser extends AbstractPluginHelper implements ComponentHtmlParser {
+
+        private static String HEADER_TAG = "header";
+        private static String CONTENT_TAG = "content";
+        private static String FOOTER_TAG = "footer";
+
+        private static ModalDialogHtmlParser instance;
+
+        private ModalDialogHtmlParser() {
+            tags.put(HEADER_TAG, Collections.emptyList());
+            tags.put(CONTENT_TAG, Collections.emptyList());
+            tags.put(FOOTER_TAG, Collections.emptyList());
+
+        }
+
+        public static ModalDialogHtmlParser getInstance() {
+            if (instance == null)
+                return instance = new ModalDialogHtmlParser();
+            return instance;
+        }
+
+        @Override
+        public Dialog parse(HTMLElement html, Map<String, ?> elements) {
+            Dialog modalDialog;
+
+            DialogView view = getView(Dialog.class, html, elements);
+            if (view != null)
+                modalDialog = new Dialog(view);
+            else
+                modalDialog = new Dialog();
+
+            NodeList<? extends HTMLElement> titles = html.getElementsByTagName(HEADER_TAG);
+            for (int i = 0; i < titles.getLength(); i++) {
+                modalDialog.getView().getViewSlots().getHeaderPanel().setInnerHTML(titles.item(i).getInnerHTML());
+                break;
+            }
+            NodeList<? extends HTMLElement> contents = html.getElementsByTagName(CONTENT_TAG);
+            for (int i = 0; i < contents.getLength(); i++) {
+                modalDialog.getView().getViewSlots().getContentPanel().setInnerHTML(contents.item(i).getInnerHTML());
+                break;
+            }
+            NodeList<? extends HTMLElement> bottoms = html.getElementsByTagName(FOOTER_TAG);
+            for (int i = 0; i < contents.getLength(); i++) {
+                modalDialog.getView().getViewSlots().getFooterPanel().setInnerHTML(bottoms.item(i).getInnerHTML());
+                break;
+            }
+            replaceAndCopy(html, modalDialog);
+            DomUtil.removeElement(html);
+            return modalDialog;
+        }
+
+        @Override
+        public String getId() {
+            return "dn-modal-dialog";
+        }
+
+        @Override
+        public Class getClazz() {
+            return Dialog.class;
+        }
+    }
+
+}

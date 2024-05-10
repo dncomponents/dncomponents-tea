@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <directory url="file://$PROJECT_DIR$/create-project/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/create-project-material/src/main/resources/archetype-resources" includeSubdirectories="true" />
+    </excludeFromCompile>
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="core-cell" />
+        <module name="core" />
+        <module name="template_annotation_processor" />
+        <module name="coreuui" />
+        <module name="core-uui" />
+        <module name="mvp" />
+      </profile>
+      <profile name="Annotation profile for material-ui" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="register" value="MaterialTemplates" />
+        <processor name="com.dncomponents.TemplateProcessor" />
+        <module name="material-ui" />
+      </profile>
+      <profile name="Annotation profile for main" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="cssDir" value="$PROJECT_DIR$/main/src/main/webapp" />
+        <option name="register" value="AppTemplates" />
+        <option name="src" value="$PROJECT_DIR$/main/src/main/java" />
+        <processor name="com.dncomponents.TemplateProcessor" />
+        <module name="main" />
+      </profile>
+      <profile name="Annotation profile for dn-components" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="register" value="BootstrapTemplates" />
+        <option name="src" value="$PROJECT_DIR$/bootstrap-ui/src/main/java" />
+        <processor name="com.dncomponents.TemplateProcessor" />
+        <module name="bootstrap-ui" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bla" target="8" />
+      <module name="bootstrap-ui-cell" target="8" />
+      <module name="cellcore" target="1.8" />
+      <module name="create-project" target="1.8" />
+      <module name="create-project-material" target="1.8" />
+      <module name="main-material" target="11" />
+      <module name="material-ui-cell" target="8" />
+      <module name="testbs" target="8" />
+      <module name="views" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="bla" options="-Aregister=RegisterTemplatesMain" />
+      <module name="bootstrap-ui" options="-Aregister=BootstrapTemplates -Asrc=$PROJECT_DIR$/bootstrap-ui/src/main/java" />
+      <module name="bootstrap-ui-cell" options="-Aregister=BootstrapCellTemplates" />
+      <module name="create-project" options="" />
+      <module name="main" options="-Asrc=$PROJECT_DIR$/main/src/main/java -AcssDir=$PROJECT_DIR$/main/src/main/webapp -Aregister=AppTemplates" />
+      <module name="main-material" options="-Aregister=MaterialAppTemplates" />
+      <module name="material-ui" options="-Aregister=MaterialTemplates" />
+      <module name="material-ui-cell" options="-Aregister=MaterialCellTemplates" />
+      <module name="template_annotation_processor" options="" />
+    </option>
+  </component>
+</project>

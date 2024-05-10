@@ -1,0 +1,6 @@
+# Project exclude paths
+/bootstrap-ui/target/
+/core/target/
+/core-uui/target/
+/mvp/target/
+/template_annotation_processor/target/

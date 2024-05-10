@@ -1,0 +1,196 @@
+/*
+ * Copyright 2024 dncomponents
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.dncomponents.client.components.accordion;
+
+import com.dncomponents.client.components.core.AbstractPluginHelper;
+import com.dncomponents.client.components.core.BaseComponentMultiSelection;
+import com.dncomponents.client.components.core.ComponentHtmlParser;
+import com.dncomponents.client.components.core.entities.ItemIdTitle;
+import com.dncomponents.client.components.core.selectionmodel.DefaultMultiSelectionModel;
+import com.dncomponents.client.dom.DomUtil;
+import com.dncomponents.client.views.Ui;
+import com.dncomponents.client.views.core.ui.accordion.AccordionUi;
+import org.teavm.jso.dom.html.HTMLElement;
+import org.teavm.jso.dom.xml.NodeList;
+
+import java.util.Collections;
+import java.util.Map;
+import java.util.function.Consumer;
+
+
+public class Accordion<T> extends BaseComponentMultiSelection<T, AccordionUi, AccordionItem<T>> {
+
+    AccordionItem.RenderAccordionItem<T> accordionItemRenderer;
+
+    private boolean multiExpand = true;
+    private boolean allClosed;
+
+    public Accordion(AccordionUi ui) {
+        super(ui);
+    }
+
+    public Accordion() {
+        this(Ui.get().getAccordionUi());
+    }
+
+    public void addItem(AccordionItem<T> item) {
+        super.addItem(item);
+        view.getRootView().addItem(item);
+        if (!allClosed && getItems().size() == 1)
+            setSelected(getItems().get(0), true);
+    }
+
+    public void removeItem(AccordionItem<T> item) {
+        super.removeItem(item);
+        view.getRootView().removeItem(item);
+    }
+
+    @Override
+    public void removeAllItems() {
+        super.removeAllItems();
+        view.getRootView().clearAll();
+    }
+
+    @Override
+    public AccordionItem<T> createItem(T t) {
+        return new AccordionItem<>(this, t);
+    }
+
+    boolean singleSelectionChanged;
+
+    @Override
+    public boolean setSelected(AccordionItem<T> item, boolean b, boolean fireEvent) {
+        if (singleSelectionChanged)
+            clearSelection(item);
+        if (!allClosed && getSelection().size() == 1 && getSelection().get(0).equals(item) && !b)
+            return false;
+        else
+            return super.setSelected(item, b, fireEvent);
+    }
+
+    private void clearSelection(AccordionItem<T> item) {
+        if (selectionGroup.getSelectionMode() == DefaultMultiSelectionModel.SelectionMode.SINGLE) {
+            singleSelectionChanged = false;
+            getItems().forEach(new Consumer<AccordionItem<T>>() {
+                @Override
+                public void accept(AccordionItem<T> ai) {
+                    if (ai != item)
+                        setSelected(ai, false, false);
+                }
+            });
+        }
+    }
+
+    public void setItemRenderer(AccordionItem.RenderAccordionItem<T> accordionItemRenderer) {
+        this.accordionItemRenderer = accordionItemRenderer;
+    }
+
+
+    public boolean isMultiExpand() {
+        return multiExpand;
+    }
+
+    public void setMultiExpand(boolean multiExpand) {
+        this.multiExpand = multiExpand;
+        singleSelectionChanged = !multiExpand;
+        if (multiExpand)
+            selectionGroup.setSelectionMode(DefaultMultiSelectionModel.SelectionMode.MULTI);
+        else
+            selectionGroup.setSelectionMode(DefaultMultiSelectionModel.SelectionMode.SINGLE);
+    }
+
+    public boolean isAllClosed() {
+        return allClosed;
+    }
+
+    public void setAllClosed(boolean allClosed) {
+        this.allClosed = allClosed;
+    }
+
+    @Override
+    protected AccordionUi getView() {
+        return super.getView();
+    }
+
+    public static class AccordionHtmlParser extends AbstractPluginHelper implements ComponentHtmlParser {
+
+        private static String TITLE_TAG = "title";
+        private static String CONTENT_TAG = "content";
+
+        private static AccordionHtmlParser instance;
+
+        private AccordionHtmlParser() {
+            tags.put(TITLE_TAG, Collections.emptyList());
+            tags.put(CONTENT_TAG, Collections.emptyList());
+        }
+
+        public static AccordionHtmlParser getInstance() {
+            if (instance == null)
+                return instance = new AccordionHtmlParser();
+            return instance;
+        }
+
+        @Override
+        public Accordion parse(HTMLElement htmlElement, Map<String, ?> templateElement) {
+            Accordion<ItemIdTitle> accordion = new Accordion<>();
+            NodeList<? extends HTMLElement> elementsByTagName = htmlElement.getElementsByTagName(ITEM);
+            for (int i = 0; i < elementsByTagName.getLength(); i++) {
+                AccordionItem<ItemIdTitle> accordionItem =
+                        parseAccordionItem((HTMLElement) elementsByTagName.item(i), accordion);
+                accordion.addItem(accordionItem);
+            }
+            replaceAndCopy(htmlElement, accordion);
+            return accordion;
+        }
+
+        @Override
+        public String getId() {
+            return "dn-accordion";
+        }
+
+        @Override
+        public Class getClazz() {
+            return Accordion.class;
+        }
+
+        public AccordionItem<ItemIdTitle> parseAccordionItem(HTMLElement node, Accordion accordion) {
+            AccordionItem<ItemIdTitle> item = new AccordionItem(accordion);
+            ItemIdTitle idItem = new ItemIdTitle();
+            item.setUserObject(idItem);
+            idItem.setId(getElementId(node));
+            NodeList<? extends HTMLElement> titles = node.getElementsByTagName(TITLE_TAG);
+            for (int i = 0; i < titles.getLength(); i++) {
+                idItem.setTitle(titles.item(i).getTextContent());
+                item.getViewSlots().getTitle().setInnerHTML(titles.item(i).getTextContent());
+                DomUtil.removeElement(titles.item(i));
+                break;
+            }
+            NodeList<? extends HTMLElement> contents = node.getElementsByTagName(CONTENT_TAG);
+            for (int i = 0; i < contents.getLength(); i++) {
+                idItem.setContent(contents.item(i).getInnerHTML());
+                item.getViewSlots().getContent().setInnerHTML(contents.item(i).getInnerHTML());
+                break;
+            }
+            return item;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "accordion: tag : " + AccordionHtmlParser.getInstance().getId();
+    }
+}

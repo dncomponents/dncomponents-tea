@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/bootstrap-ui/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootstrap-ui/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootstrap-ui/target/generated-sources/annotations" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/core-uui/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/core-uui/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/core/target/generated-sources/annotations" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/main/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/main/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/main/target/generated-sources/annotations" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/material-ui/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/material-ui/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/material-ui/target/generated-sources/annotations" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mvp/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mvp/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mvp/target/generated-sources/annotations" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/template_annotation_processor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/template_annotation_processor/src/main/resources" charset="UTF-8" />
+    <file url="file:///src/main/super" charset="UTF-8" />
+  </component>
+</project>

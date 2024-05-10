@@ -1,0 +1,71 @@
+<!--
+  ~ Copyright 2024 dncomponents
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<template ui-field="treeMain">
+    <ul ui-field="root" class="list-group scroll-style tree" style="border: 1px solid lightgrey;"></ul>
+    <style-item ui-field="ROW_HEIGHT" class="49"></style-item>
+</template>
+<template ui-field="test">
+
+</template>
+<template ui-field="treeItemSimple">
+    <td ui-field="root">
+                <span style="margin-left:48px;">
+                             <span ui-field="valuePanel"></span>
+                </span>
+    </td>
+    <style-item ui-field="modelSelected" class="active"></style-item>
+</template>
+<template ui-field="treeItemSimpleParent">
+    <td ui-field="root">
+        <i ui-field="openCloseElement" style="margin-right:  10px;"></i>
+        <span ui-field="valuePanel"></span>
+    </td>
+    <style-item ui-field="openStyle" class="fas fa-plus pexp"></style-item>
+    <style-item ui-field="closeStyle" class="fas fa-minus pexp"></style-item>
+    <style-item ui-field="modelSelected" class="active"></style-item>
+</template>
+
+<template ui-field="treeItemSimpleCheckbox">
+     <td ui-field="root">
+                <span style="margin-left:  48px;">
+                    <dn-checkbox ui-field="checkBox" view="SIMPLE"></dn-checkbox>
+                  <span ui-field="valuePanel"></span>
+                </span>
+    </td>
+</template>
+<template ui-field="treeItemSimpleParentCheckbox">
+    <td ui-field="root">
+        <i ui-field="openCloseElement" style="margin-right:  30px;"></i>
+        <dn-checkbox ui-field="checkBox" view="SIMPLE"></dn-checkbox>
+        <span ui-field="valuePanel"></span>
+    </td>
+    <style-item ui-field="openStyle" class="fas fa-plus pexp"></style-item>
+    <style-item ui-field="closeStyle" class="fas fa-minus pexp"></style-item>
+</template>
+<template ui-field="tableTreeItemSimpleParent">
+    <tr ui-field="root">
+        <td ui-field="openCloseCell">
+            <div class="horizontal-div">
+                <i ui-field="openCloseElement"></i>
+                <div style="width: 10px;"></div>
+                <div ui-field="valuePanel"></div>
+            </div>
+        </td>
+    </tr>
+    <style-item ui-field="openStyle" class="fas fa-plus pexp"></style-item>
+    <style-item ui-field="closeStyle" class="fas fa-minus pexp"></style-item>
+</template>

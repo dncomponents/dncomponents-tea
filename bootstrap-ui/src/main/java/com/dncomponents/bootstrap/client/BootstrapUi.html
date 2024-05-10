@@ -1,0 +1,769 @@
+<!--
+  ~ Copyright 2024 dncomponents
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<template ui-field="checkBoxFactory">
+    <template ui-field="checkBoxDefault">
+        <div ui-field="root" class="form-check">
+            <label class="form-check-label">
+                <input ui-field="checkBoxInput" class="form-check-input" type="checkbox" value="">
+                <span ui-field="labelText"></span>
+            </label>
+        </div>
+    </template>
+    <template ui-field="checkBoxSimple">
+        <input ui-field="checkBoxInput" class="form-check-input" type="checkbox" value="">
+    </template>
+</template>
+<!--  TEXTBOX  -->
+<template>
+    <style-item ui-field="disabledStyle" class="disabled"/>
+</template>
+<template ui-field="textbox">
+    <input ui-field="root" class="form-control" type="text">
+</template>
+<!--  TEXTAREA  -->
+<template ui-field="textarea">
+    <textarea ui-field="root" rows="5" class="form-control"></textarea>
+</template>
+<!--  RADIO  -->
+<template ui-field="radio">
+    <div ui-field="root" class="form-check">
+        <label class="form-check-label">
+            <input ui-field="checkBoxInput" class="form-check-input" type="radio" value="">
+            <label ui-field="labelText" class="form-check-label">
+
+            </label>
+        </label>
+    </div>
+</template>
+<!--  CHECKBOX  -->
+<template ui-field="checkbox">
+    <div ui-field="root" class="form-check">
+        <input ui-field="checkBoxInput" class="form-check-input" type="checkbox" value="">
+        <label ui-field="labelText" class="form-check-label">
+
+        </label>
+    </div>
+</template>
+<!--SIMPLE CHECKBOX-->
+<template ui-field="simplecheckbox">
+    <input ui-field="root" class="form-check-input" type="checkbox" value="">
+</template>
+<!--  BUTTON  -->
+<template ui-field="button">
+    <button ui-field="root" class="btn btn-primary"></button>
+    <style-item ui-field="disabledStyle" class="disabled"/>
+</template>
+<!--  BUTTON  ICON-->
+<template ui-field="buttonIcon">
+    <button ui-field='root' class="btn">
+        <i ui-field="iconPanel"></i>
+        <span ui-field="textPanel"></span>
+    </button>
+    <style-item ui-field="disabledStyle" class="disabled"/>
+</template>
+<template ui-field="buttonBuilder">
+
+    <style-item ui-field="baseStyle" class="btn"></style-item>
+    <!--color-->
+    <style-item ui-field="btnSuccess" class="btn-success"></style-item>
+    <style-item ui-field="btnDanger" class="btn-danger"></style-item>
+    <style-item ui-field="btnInfo" class="btn-info"></style-item>
+    <style-item ui-field="btnWarning" class="btn-warning"></style-item>
+    <style-item ui-field="btnPrimary" class="btn-primary"></style-item>
+    <style-item ui-field="btnSecondary" class="btn-secondary"></style-item>
+    <style-item ui-field="btnLight" class="btn-light"></style-item>
+    <style-item ui-field="btnDark" class="btn-dark"></style-item>
+    <style-item ui-field="btnLink" class="btn-link"></style-item>
+    <!--outline color-->
+    <style-item ui-field="btnOutlineSuccess" class="btn-outline-success"></style-item>
+    <style-item ui-field="btnOutlineInfo" class="btn-outline-info"></style-item>
+    <style-item ui-field="btnOutlineWarning" class="btn-outline-warning"></style-item>
+    <style-item ui-field="btnOutlineDanger" class="btn-outline-danger"></style-item>
+    <style-item ui-field="btnOutlinePrimary" class="btn-outline-primary"></style-item>
+    <style-item ui-field="btnOutlineSecondary" class="btn-outline-secondary"></style-item>
+    <style-item ui-field="btnOutlineLight" class="btn-outline-light"></style-item>
+    <style-item ui-field="btnOutlineDark" class="btn-outline-dark"></style-item>
+    <style-item ui-field="btnOutlineLink" class="btn-outline-link"></style-item>
+    <!--size-->
+    <style-item ui-field="small" class="btn-sm"></style-item>
+    <style-item ui-field="large" class="btn-lg"></style-item>
+    <style-item ui-field="block" class="btn-block"></style-item>
+</template>
+<!--  TAB  -->
+<template ui-field="tabUi">
+    <template ui-field="tab">
+        <div ui-field="root" style="width:100%;">
+            <ul ui-field="tabPanel" class="nav nav-tabs" style="margin-bottom: 1rem">
+
+            </ul>
+            <div ui-field="tabContentPanel" class="tab-content">
+
+            </div>
+        </div>
+    </template>
+    <template ui-field="tabVertical">
+        <div ui-field="root" class="row">
+            <div class="col-3">
+                <ul ui-field="tabPanel" class="nav nav-tabs">
+
+                </ul>
+            </div>
+            <div class="col-9">
+                <div ui-field="tabContentPanel" class="tab-content">
+
+                </div>
+            </div>
+        </div>
+    </template>
+    <template ui-field="tabItem">
+        <li ui-field="tabItemNav" class="nav-item">
+            <a ui-field="tabItemPanel" class="nav-link" data-toggle="tab" href="javascript:void(0)"
+               role="tab">
+
+            </a>
+        </li>
+        <div ui-field="tabItemContent" class="tab-pane fade" role="tabpanel">
+
+        </div>
+        <style-item ui-field="showTabContentStyle" class="show active"/>
+        <style-item ui-field="active" class="active"/>
+    </template>
+</template>
+<!--  ACCORDION  -->
+<template ui-field="accordionUi">
+    <template ui-field="accordion">
+        <div ui-field="root">
+
+        </div>
+    </template>
+    <template ui-field="accordionItem">
+        <div ui-field="root" class="card">
+            <div ui-field="accordionItemTitlePanel" class="card-header">
+                <h5 class="mb-0">
+                    <a href="javascript:void(0)" ui-field="accordionItemTitle">
+                    </a>
+                </h5>
+            </div>
+            <div ui-field="contentPanelParent" class="collapse" role="tabpanel"
+                 aria-labelledby="headingOne">
+                <div ui-field="contentPanel" class="card-body">
+                </div>
+            </div>
+        </div>
+        <style-item ui-field="showContentStyle" class="show"/>
+    </template>
+</template>
+<!--DROPDOWN-->
+<template ui-field="dropDownUi">
+    <template ui-field="dropdown">
+        <div class="dropdown" ui-field="root">
+            <button ui-field="button" class="btn btn-secondary dropdown-toggle">
+
+            </button>
+            <div ui-field="dropDownMenu" class="dropdown-menu">
+            </div>
+        </div>
+        <style-item ui-field="dropDownMenuShowStyle" class="show"></style-item>
+    </template>
+    <template ui-field="dropDownItem">
+        <a ui-field="root" class="dropdown-item" href="javascript:void(0)"></a>
+    </template>
+</template>
+<!--POPOVER-->
+<template ui-field="popover">
+    <div ui-field="root" class="popover fade bs-popover-right show" role="tooltip" x-placement="right">
+        <div ui-field="arrowPanel" class="arrow"></div>
+        <h3 ui-field="popoverTitle" class="popover-header"></h3>
+        <div ui-field="contentPanel" class="popover-body">
+        </div>
+    </div>
+    <style-item ui-field="topStyle" class="bs-popover-top"></style-item>
+    <style-item ui-field="bottomStyle" class="bs-popover-bottom"></style-item>
+    <style-item ui-field="leftStyle" class="bs-popover-left"></style-item>
+    <style-item ui-field="rightStyle" class="bs-popover-right"></style-item>
+    <style-item ui-field="baseStyle" class="popover"></style-item>
+    <style-item ui-field="fadeStyle" class="fade"></style-item>
+    <style-item ui-field="showStyle" class="show"></style-item>
+</template>
+<!--TOOLTIP-->
+<!-- Generated markup by the plugin -->
+<template ui-field="tooltip">
+    <div ui-field="root" class="tooltip bs-tooltip-top" role="tooltip">
+        <div ui-field="arrowPanel" class="arrow"></div>
+        <div ui-field="contentPanel" class="tooltip-inner">
+        </div>
+    </div>
+    <style-item ui-field="topStyle" class="bs-tooltip-top"></style-item>
+    <style-item ui-field="bottomStyle" class="bs-tooltip-bottom"></style-item>
+    <style-item ui-field="leftStyle" class="bs-tooltip-left"></style-item>
+    <style-item ui-field="rightStyle" class="bs-tooltip-right"></style-item>
+    <style-item ui-field="baseStyle" class="tooltip show"></style-item>
+    <style-item ui-field="fadeStyle" class="fade"></style-item>
+    <style-item ui-field="showStyle" class="show"></style-item>
+</template>
+<!--DIALOG-->
+<template ui-field="modalDialog">
+    <div ui-field="root" class="modal fade" tabindex="-1">
+        <div ui-field="modalDialogPanel" class="modal-dialog">
+            <div class="modal-content">
+                <div ui-field="header" class="modal-header">
+                    <h5 ui-field="titleHeader" class="modal-title">
+
+                    </h5>
+                    <button ui-field="closeHeader" type="button" class="btn-close" data-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div ui-field="body" class="modal-body">
+
+                </div>
+                <div ui-field="footer" class="modal-footer">
+                    <button ui-field="closeButton" type="button" class="btn btn-secondary">Close</button>
+                    <button ui-field="okButton" type="button" class="btn btn-primary" style="display: none;">Save
+                        changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ui-field="backDropDiv" class="modal-backdrop fade show"></div>
+</template>
+<!--PROGRESS-->
+<template ui-field="progress">
+    <div ui-field="root" class="progress">
+        <div ui-field="progressBar" class="progress-bar" role="progressbar" style="width: 25%">
+
+        </div>
+    </div>
+</template>
+<template ui-field="progressBuilder">
+    <style-item ui-field="success" class="bg-success"/>
+    <style-item ui-field="info" class="bg-info"/>
+    <style-item ui-field="warning" class="bg-warning"/>
+    <style-item ui-field="danger" class="bg-danger"/>
+    <style-item ui-field="striped" class="progress-bar-striped"/>
+    <style-item ui-field="animated" class="progress-bar-animated active"/>
+</template>
+
+<!--CELL COMPONENTS-->
+<!--  LIST  -->
+<template ui-field="list">
+    <template ui-field="listMain">
+        <ul ui-field="root" class="list-group scroll-style"></ul>
+        <style-item ui-field='scrollableStyle' class='scroll-style'></style-item>
+        <style-item ui-field="rowHeight" class="49"></style-item>
+    </template>
+
+    <template ui-field="listItem">
+        <li ui-field="root" class="list-group-item"></li>
+        <style-item ui-field="modelSelected" class="active"></style-item>
+    </template>
+
+    <template ui-field="listItemCheckbox">
+        <li ui-field="root" class="list-group-item" style="padding-left:  30px;">
+            <dn-checkbox ui-field="checkBox" view="SIMPLE"></dn-checkbox>
+            <span ui-field="valuePanel"></span>
+        </li>
+        <style-item ui-field="modelSelected" class="active"></style-item>
+    </template>
+</template>
+<!--   TREE  -->
+<template ui-field="tree">
+    <template ui-field="treeMain">
+        <ul ui-field="root" class="list-group scroll-style tree" style="border: 1px solid lightgrey;"></ul>
+        <style-item ui-field="rowHeight" class="49"></style-item>
+    </template>
+    <template ui-field="treeItemSimple">
+        <li ui-field="root" class="list-group-item">
+                <span style="margin-left:35px;">
+                  <span ui-field="valuePanel"></span>
+                </span>
+        </li>
+        <style-item ui-field="modelSelected" class="active"></style-item>
+    </template>
+    <template ui-field="treeItemSimpleParent">
+        <li ui-field="root" class="list-group-item">
+            <i ui-field="openCloseElement" style="margin-right:  10px;"></i>
+            <span ui-field="valuePanel"></span>
+        </li>
+        <style-item ui-field="openStyle" class="fas fa-plus pexp"></style-item>
+        <style-item ui-field="closeStyle" class="fas fa-minus pexp"></style-item>
+        <style-item ui-field="modelSelected" class="active"></style-item>
+    </template>
+
+    <template ui-field="treeItemSimpleCheckbox">
+        <li class="list-group-item" ui-field="root">
+                <span style="margin-left:  35px;">
+                    <dn-checkbox ui-field="checkBox" view="SIMPLE"></dn-checkbox>
+                  <span ui-field="valuePanel"></span>
+                </span>
+        </li>
+    </template>
+    <template ui-field="treeItemSimpleParentCheckbox">
+        <li ui-field="root" class="list-group-item">
+            <i ui-field="openCloseElement" style="margin-right:  30px;"></i>
+            <dn-checkbox ui-field="checkBox" view="SIMPLE"></dn-checkbox>
+            <span ui-field="valuePanel"></span>
+        </li>
+        <style-item ui-field="openStyle" class="fas fa-plus pexp"></style-item>
+        <style-item ui-field="closeStyle" class="fas fa-minus pexp"></style-item>
+    </template>
+</template>
+<!--   TABLE  -->
+<template ui-field="tableUi">
+
+    <template ui-field="filterPanel">
+        <div ui-field="root" class="d-flex">
+            <div ui-field="mainPanel" class="input-group input-group-sm">
+                <dn-autocomplete ui-field="ac" template-id="acc"></dn-autocomplete>
+                <div ui-field="valueHolder"></div>
+            </div>
+            <button ui-field="clear" class="btn btn-sm btn-outline-secondary ms-2">x</button>
+        </div>
+        <style-item ui-field="booleanMainPanelStyle"
+                    class="d-flex justify-content-between align-items-center"></style-item>
+        <template ui-template="acc">
+            <div ui-field='root' class='input-group-prepend'>
+                <dn-button ui-field='button' class='btn btn-outline-secondary btn-sm dropdown-toggle'>
+                    <span ui-field='buttonText'>Choose ...</span>
+                </dn-button>
+                <div ui-field='listPanel' class='autocomplete-scroll-panel'>
+                    <dn-text-box ui-field='textBox'></dn-text-box>
+                    <div class='scroll-style'>
+                        <dn-list ui-field="list"></dn-list>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </template>
+
+    <template ui-field="tableRowExpanderItem">
+        <td ui-field="root" class="text-center pexp">
+            <i ui-field="openClosedElement" class="fas fa-times pexp"></i>
+        </td>
+        <style-item ui-field="openStyle" class="fas fa-plus"></style-item>
+        <style-item ui-field="closeStyle" class="fas fa-minus"></style-item>
+    </template>
+
+    <template ui-field="tableCheckboxColumn">
+        <td ui-field="root" class="text-center pex">
+            <dn-checkbox ui-field="checkBox" view="SIMPLE"></dn-checkbox>
+        </td>
+    </template>
+
+    <template ui-field="tableHeaderCheckbox">
+        <th ui-field="root" class="text-center pex">
+            <dn-checkbox ui-field="checkBox" style="display: inline-block;padding-left: 2rem;"></dn-checkbox>
+            <span ui-field="textPanel"></span>
+        </th>
+    </template>
+
+    <template ui-field="headerEdit">
+        <th ui-field="root">
+            <button ui-field="addBtn" class="btn btn-outline-info btn-sm">Add</button>
+        </th>
+    </template>
+
+    <template ui-field="tableCellEdit">
+        <td ui-field="root">
+            <button ui-field="btnEdit" class="btn btn-outline-info btn-sm">Edit</button>
+            <button ui-field="btnSave" class="btn btn-outline-info btn-sm">Save</button>
+            <button ui-field="btnCancel" class="btn btn-outline-danger btn-sm">Cancel</button>
+            <button ui-field="btnDelete" class="btn btn-outline-danger btn-sm">Delete</button>
+        </td>
+    </template>
+
+    <template ui-field="footerCell">
+        <td ui-field="root">
+        </td>
+    </template>
+
+    <template ui-field="tableTreeItemSimpleParent">
+        <tr ui-field="root">
+            <td ui-field="openCloseCell">
+                <div class="horizontal-div">
+                    <i ui-field="openCloseElement"></i>
+                    <div style="width: 10px;"></div>
+                    <div ui-field="valuePanel"></div>
+                </div>
+            </td>
+        </tr>
+        <style-item ui-field="openStyle" class="fas fa-plus pexp"></style-item>
+        <style-item ui-field="closeStyle" class="fas fa-minus pexp"></style-item>
+    </template>
+
+    <template ui-field="tableMain">
+        <style-item ui-field="rowHeight" class="49"></style-item>
+        <div ui-field="root" class="table-main">
+            <div ui-field="headerBarRow">
+                <!--header bar content here-->
+            </div>
+            <div>
+                <table ui-field="tableHeader" class="table-header table table-bordered fixed-table table-header-style">
+                    <colgroup ui-field="headerColgroupPanel"></colgroup>
+                    <tbody ui-field="headerBodyPanel">
+                    <tr ui-field="headerRow">
+                        <!--header content here-->
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div ui-field="tableContentPanel" class="table-content-panel scroll-style" style="padding-right: 1px">
+                <table ui-field="tableContent" class="table table-bordered fixed-table">
+                    <colgroup ui-field="contentColgroupPanel"></colgroup>
+                    <tbody ui-field="rowsPanel">
+                    <!--main content here-->
+                    </tbody>
+                </table>
+            </div>
+            <div ui-field="footerPanel">
+                <table ui-field="tableFooter" class="table-header table table-bordered fixed-table">
+                    <colgroup ui-field="tableFooterColGroup"></colgroup>
+                    <tbody ui-field="footerBodyPanel">
+                    <tr ui-field="tableFooterRow">
+                        <!--footer content here-->
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ui-field="footerPagerPanel">
+                <!--pager goes here-->
+            </div>
+        </div>
+    </template>
+    <template ui-field="tableRow">
+        <tr ui-field="root"></tr>
+        <style-item ui-field="modelSelected" class="table-primary"></style-item>
+    </template>
+    <template ui-field="tableColumn">
+        <td ui-field="root"></td>
+        <style-item ui-field="valueChanged" class="valueChanged"></style-item>
+        <style-item ui-field="errorCell" class="errorCell"></style-item>
+    </template>
+
+    <template ui-field="tableColumnSortHeader">
+        <td ui-field="root">
+            <div ui-field="textPanel"></div>
+            <div style="position: relative;" class="float-end">
+                <div style="right: 1px;top: -19px;position:absolute;">
+                    <div ui-field="sortIcon" class="float-end header-s2"></div>
+                </div>
+            </div>
+        </td>
+        <style-item ui-field="sortUpStyle" class="fa fa-sort-down float-end"></style-item>
+        <style-item ui-field="sortDownStyle" class="fa fa-sort-up float-end"></style-item>
+    </template>
+    <template ui-field="tableColumnMenuHeader">
+        <td ui-field="root">
+            <div ui-field="textPanel"></div>
+
+            <div style="position: relative;" class="float-end">
+                <div style="left: -100px;top: -19px;position:absolute;">
+                    <div ui-field="filterIconPanel" class="fa fa-filter float-end header-s2"></div>
+                    <div ui-field="groupByIconPanel" class="fa fa-group float-end header-s2"></div>
+                    <div ui-field="sortIconPanel" class="float-end header-s2"></div>
+                </div>
+                <!--fa fa-sort-->
+                <div style="right: 1px;top: -30px;position:absolute;">
+                    <div ui-field="menuHolder"></div>
+                </div>
+            </div>
+        </td>
+        <style-item ui-field="sortStyle" class="fa fa-sort float-end"></style-item>
+        <style-item ui-field="sortUpStyle" class="fa fa-sort-down float-end"></style-item>
+        <style-item ui-field="sortDownStyle" class="fa fa-sort-up float-end"></style-item>
+    </template>
+
+    <template ui-field="tableColumnFilterHeader">
+        <td ui-field="root">
+            <div ui-field="textPanel" style="font-weight: bold"></div>
+            <div ui-field="sortIconPanel" class="float-end header-s2"></div>
+            <div ui-field="filterIconPanel" class="fa fa-filter float-end header-s2"></div>
+            <div ui-field="filterPanelElement"></div>
+        </td>
+    </template>
+
+</template>
+<!--  DROPDOWN MULTILEVEL   -->
+<template ui-field="dropDownMultiLevelUi">
+    <template ui-field="dropdown">
+        <div class="dropdown" ui-field="root">
+            <button ui-field="button" class="btn btn-secondary dropdown-toggle">
+
+            </button>
+            <div ui-field="dropDownMenu" class="dropdown-menu">
+            </div>
+        </div>
+        <style-item ui-field="dropDownMenuShowStyle" class="show"></style-item>
+    </template>
+    <template ui-field="dropdownItem">
+        <a ui-field="root" class="dropdown-item" href="javascript:void(0)"></a>
+    </template>
+    <template ui-field="dropdownItemHasChildren">
+        <a ui-field="root" class="dropdown-item" href="javascript:void(0)">
+            <span ui-field="textPanel"></span>
+            <span style="position: absolute;right: 5px;">
+            <i class="fa fa-angle-right"></i>
+        </span>
+        </a>
+    </template>
+    <template ui-field="dropdownPanelHasChildren">
+        <div ui-field="root" class="dropdown-menu dropdownPanel">
+        </div>
+    </template>
+</template>
+<!--  AUTOCOMPLETE  -->
+<template ui-field="autocomplete">
+    <div ui-field='root' class='autocomplete'>
+        <dn-button ui-field='button' class='btn btn-secondary dropdown-toggle'>
+            <span ui-field='buttonText'>Choose ...</span>
+        </dn-button>
+        <div ui-field='listPanel' class='autocomplete-scroll-panel'>
+            <dn-text-box ui-field='textBox'></dn-text-box>
+            <div class='scroll-style'>
+                <dn-list ui-field="list"></dn-list>
+            </div>
+        </div>
+    </div>
+</template>
+<!--  AUTOCOMPLETE  TREE-->
+<template ui-field="autocompleteTree">
+    <div ui-field='root' class='autocomplete'>
+        <dn-button ui-field='button' class='btn btn-secondary dropdown-toggle'>
+            <span ui-field='buttonText'>Choose ...</span>
+        </dn-button>
+        <div ui-field='listPanel' class='autocomplete-scroll-panel'>
+            <dn-text-box ui-field='textBox'></dn-text-box>
+            <div class='scroll-style'>
+                <dn-tree ui-field="tree"></dn-tree>
+            </div>
+        </div>
+    </div>
+</template>
+<!--AUTOCOMPLETE MULTISELECT-->
+<template ui-field="autocompleteMultiSelect">
+    <template ui-field="rootView">
+        <div ui-field='root'
+             class='autocomplete autocomplete-container autocomplete-container-multi autocomplete-container-active'>
+            <ul ui-field="selectionPanel" class="autocomplete-choices">
+            </ul>
+            <div ui-field='listPanel' class='autocomplete-scroll-panel'>
+                <dn-text-box ui-field='textBox'></dn-text-box>
+                <div ui-field="listOrTreePanel" class='scroll-style'>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template ui-field="itemView">
+        <li class="search-choice" ui-field="root">
+            <span ui-field="mainPanel"></span>
+            <a class="fas fa-times pexp" style="position: relative;right: -16px" ui-field="removeBtn"></a>
+        </li>
+    </template>
+</template>
+<!--PAGER-->
+<template ui-field="pagerUi">
+    <template ui-field="pager">
+        <ul ui-field="root" class="pagination">
+            <li><span ui-field="textPanel" style="margin-right: 15px"></span></li>
+            <li ui-field="first" class="page-item">
+                <a class="page-link" href="javascript:void(0)" aria-label="First">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">First</span>
+                </a>
+            </li>
+            <li ui-field="previous" class="page-item">
+                <a class="page-link" href="javascript:void(0)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="pageItem">
+                <dn-integer-box ui-field="numberField"></dn-integer-box>
+                <!--<input ui-field="pageNumberField" class="form-control" type="text">-->
+            </li>
+            <li ui-field="next" class="page-item">
+                <a class="page-link" href="javascript:void(0)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+            <li ui-field="last" class="page-item">
+                <a class="page-link" href="javascript:void(0)" aria-label="Last">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Last</span>
+                </a>
+            </li>
+        </ul>
+        <style-item ui-field="disabledStyle" class="disabled"/>
+    </template>
+    <template ui-field="pagerItem">
+        <li ui-field="root" class="page-item">
+            <a ui-field="textPanel" class="page-link" href="javascript:void(0)">1</a>
+        </li>
+    </template>
+</template>
+<template ui-field="pagerListUi">
+    <template ui-field="pager">
+        <ul ui-field="root" class="pagination justify-content-center">
+            <!---->
+        </ul>
+    </template>
+    <template ui-field="pagerItem">
+        <li ui-field="root" class="page-item">
+            <a ui-field="textPanel" class="page-link" href="javascript:void(0)">1</a>
+        </li>
+    </template>
+</template>
+
+<template ui-field="treeCellIconView">
+    <li ui-field="root" class="list-group-item">
+        <a>
+            <i ui-field="iconPanel" class="fa fa-envelope-open"></i>
+            <span ui-field="valuePanel"></span>
+        </a>
+    </li>
+    <style-item ui-field="modelSelected" class="active"></style-item>
+</template>
+<template ui-field="treeCellParentIconView">
+    <li ui-field="root" class="list-group-item">
+        <a href="javascript:void(0)">
+            <i ui-field="iconPanel" class="fa fa-bus"></i>
+            <span ui-field="valuePanel"></span>
+            <span class="pull-right-container">
+                <i ui-field="openCloseElement" class="fa fa-angle-down float-end"></i>
+                 </span>
+        </a>
+    </li>
+    <style-item ui-field="openStyle" class="fa fa-angle-left"></style-item>
+    <style-item ui-field="closeStyle" class="fa fa-angle-down"></style-item>
+</template>
+<template ui-field="filterPanelList">
+    <div ui-field="root" class="d-flex">
+        <div class="btn-group btn-group-sm" style="width: 100%;">
+            <dn-autocomplete ui-field="ac" template-id="acc"></dn-autocomplete>
+            <div ui-field="valueHolder"></div>
+        </div>
+        <button ui-field="clear" class="btn btn-sm btn-outline-secondary ms-2">x</button>
+    </div>
+    <template ui-template="acc" ui-field="accTemplate">
+        <div ui-field='root' class='btn-group btn-group-sm'>
+            <dn-button ui-field='button' class='btn btn-sm btn-outline-secondary dropdown-toggle'>
+                <span ui-field='buttonText'>Choose ...</span>
+            </dn-button>
+            <div ui-field='listPanel' class='autocomplete-scroll-panel'>
+                <dn-text-box ui-field='textBox'></dn-text-box>
+                <div class='scroll-style'>
+                    <dn-list ui-field="list"></dn-list>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template ui-field="autocompleteMs">
+        <template ui-field="rootView">
+            <div ui-field='root' style="width: 100%;"
+                 class='autocomplete autocomplete-container autocomplete-container-multi autocomplete-container-active'>
+                <ul ui-field="selectionPanel" class="autocomplete-choices" style="min-width: auto;">
+                </ul>
+                <div ui-field='listPanel' class='autocomplete-scroll-panel'>
+                    <dn-text-box ui-field='textBox'></dn-text-box>
+                    <div ui-field="listOrTreePanel" class='scroll-style'>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template ui-field="itemView">
+            <li class="search-choice" ui-field="root">
+                <span ui-field="mainPanel"></span>
+                <a class="fas fa-times pexp" style="position: relative;right: -16px" ui-field="removeBtn"></a>
+            </li>
+        </template>
+    </template>
+</template>
+<!--SIDEMENU-->
+<template ui-field="sidemenu">
+    <aside ui-field="root" class="col-12 col-md-3 col-xl-2 border-end scroll-style" style="max-height: 100%">
+        <div class="d-flex flex-row-reverse justify-content-between align-items-center d-md-block">
+            <div class="w-100 ms-3 ms-md-0">
+                <form>
+                    <dn-text-box ui-field="searchBox" placeHolder="Search..." addclass="w-100"></dn-text-box>
+                </form>
+            </div>
+            <hr class="d-none d-md-block mb-2">
+            <button ui-field="navBtn" class="navbar-toggler d-block d-md-none border">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img"
+                     focusable="false">
+                    <path stroke="#333" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"
+                          d="M4 7h22M4 15h22M4 23h22"></path>
+                </svg>
+            </button>
+        </div>
+        <nav class="navbar navbar-expand-md p-0">
+            <div ui-field="navbarPanel" class="navbar-collapse collapse">
+                <!--            <dn-tree ui-field="tree" ></dn-tree>-->
+                <div ui-field="treeHolder" class="pb-4"></div>
+            </div>
+        </nav>
+    </aside>
+    <template ui-field="treeSideTemplate">
+        <template ui-field="treeMain">
+            <ul ui-field="root" class="nav flex-column w-100 demo-nav"></ul>
+            <style-item ui-field="rowHeight" class="49"></style-item>
+        </template>
+        <template ui-field="treeItemSimple">
+            <li ui-field="root" class="nav-item">
+                <a href="javascript:void(0)" class="nav-link">
+                    <span ui-field="iconParent" style="display: none" class="me-3">
+                      <i ui-field="iconPanel" class="fa fa-user"></i>
+                    </span>
+                    <span ui-field="valuePanel" class="d-inline-flex me-auto">Loremipsum</span>
+                </a>
+            </li>
+            <style-item ui-field="modelSelected" class="active"></style-item>
+        </template>
+        <template ui-field="treeItemSimpleParent">
+            <li ui-field="root" class="nav-item">
+                <a href="javascript:void(0)" class="nav-link dropdown-toggle collapsed" ui-field="valuePanelParent">
+                    <span ui-field="iconParent" style="display: none" class="me-3">
+                      <i ui-field="iconPanel" class="fa fa-user"></i>
+                    </span>
+                    <span ui-field="valuePanel" class="d-inline-flex me-auto">Loremipsum</span>
+                    <i ui-field="openCloseElement" class="float-end"></i>
+                </a>
+            </li>
+            <style-item ui-field="openStyle" class=""></style-item>
+            <style-item ui-field="closeStyle" class="collapsed"></style-item>
+        </template>
+    </template>
+
+    <style-item ui-field="collapsedStyle" class="collapsed"></style-item>
+    <style-item ui-field="showNavBarPanelStyle" class="show"></style-item>
+</template>
+<template ui-field="formUi">
+    <template ui-field="form">
+        <div ui-field="root">
+            <div ui-field="mainPanel"></div>
+            <dn-button ui-field="submitBtn">Save</dn-button>
+        </div>
+    </template>
+    <template ui-field="formItem">
+        <div ui-field="root" class="mb-3">
+            <label ui-field="labelElement" class="form-label"></label>
+            <div ui-field="mainPanel"></div>
+            <div ui-field="helperTextElement" class="form-text"></div>
+        </div>
+    </template>
+</template>
