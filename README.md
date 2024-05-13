@@ -1,8 +1,11 @@
 # dncomponents
 
 
-&nbsp;&nbsp;Client side java UI framework for building rich web applications written purely in Java language using [teaVM](https://teavm.org/) compiler without any external js libraries.
+&nbsp;&nbsp;Client side java UI framework for building rich web applications written purely in Java language using [TeaVM](https://teavm.org/) compiler without any external js libraries.
 http://dncomponents.com
+
+Note: There is the same project using [GWT](https://www.gwtproject.org/) compiler [here](https://github.com/dncomponents/dncomponents)
+
 
 | Module                                |                                                                      Info |
 |---------------------------------------|--------------------------------------------------------------------------:|
