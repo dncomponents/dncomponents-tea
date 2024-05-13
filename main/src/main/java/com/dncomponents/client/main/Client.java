@@ -18,7 +18,6 @@ package com.dncomponents.client.main;
 
 import com.dncomponents.bootstrap.client.BootstrapUi;
 import com.dncomponents.client.components.core.AppTemplates;
-import com.dncomponents.client.components.core.HtmlBinder;
 import com.dncomponents.client.dom.History;
 import com.dncomponents.client.main.components.appviews.MainApp;
 import com.dncomponents.client.views.Ui;
@@ -26,25 +25,12 @@ import org.teavm.jso.dom.html.HTMLDocument;
 
 
 public class Client {
-
     public static void main(String[] args) {
         AppTemplates.register();
         Ui.setDebug(true);
-
-        testComponents();
-//        testReactive();
-        HtmlBinder.cssDevMode();
-        History.fireCurrentHistoryState();
-    }
-
-    private static void testComponents() {
         Ui.set(new BootstrapUi());
         MainApp mainApp = new MainApp();
         HTMLDocument.current().getBody().appendChild(mainApp.asNode());
-    }
-
-    private static void testReactive() {
-        com.dncomponents.client.main.reactive.MainApp mainApp2 = new com.dncomponents.client.main.reactive.MainApp();
-        HTMLDocument.current().getBody().appendChild(mainApp2.asElement());
+        History.fireCurrentHistoryState();
     }
 }

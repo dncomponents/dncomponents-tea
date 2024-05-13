@@ -19,6 +19,7 @@ package com.dncomponents.bootstrap.client.multilevel;
 import com.dncomponents.UiField;
 import com.dncomponents.client.components.core.HTMLTemplateElement;
 import com.dncomponents.client.components.core.HtmlBinder;
+import com.dncomponents.client.components.popover.Popper;
 import com.dncomponents.client.dom.handlers.MouseEnterHandler;
 import com.dncomponents.client.dom.handlers.MouseLeaveHandler;
 import com.dncomponents.client.views.IsElement;
@@ -35,7 +36,7 @@ public class DropDownTreeNodePanelViewImpl implements DropDownTreeNodePanelView 
     public HTMLElement root;
 
     //todo teavm
-//    Popper popper;
+    Popper popper;
 
 
     public DropDownTreeNodePanelViewImpl(HTMLTemplateElement templateElement) {
@@ -70,12 +71,10 @@ public class DropDownTreeNodePanelViewImpl implements DropDownTreeNodePanelView 
         else
             root.getClassList().remove("show");
         //TODO teavm
-//        if (popper == null) {
-//            Popper.Defaults def = Popper.Defaults.create();
-//            def.setPlacement(orientation);
-//            popper = new Popper(relativeTo.asElement(), this.asElement(), def);
-//        }
-//        popper.scheduleUpdate();
+        if (popper == null) {
+            popper = new Popper(relativeTo.asElement(), this.asElement(), orientation);
+        }
+        popper.scheduleUpdate();
     }
 
     @Override

@@ -64,19 +64,19 @@ public class HeaderCellHolder implements
 
     public void filtered(HeaderFiltering cell) {
         sortOrFilter(cell, filtersInOrder, multiFiltering);
-        fireEvent(new FilterEvent(filtersInOrder));
+        fireEvent(new FilterEvent().setModifiers(filtersInOrder));
         table.resetScrollTo(0d);
     }
 
     public void sorted(HeaderSorting cell) {
         sortOrFilter(cell, headerSortingList, multiSorting);
-        fireEvent(new SortEvent(headerSortingList));
+        fireEvent(new SortEvent().setModifiers(headerSortingList));
         table.resetScrollPosition();
     }
 
     public void group(HeaderGrouping cell) {
         sortOrFilter(cell, groupByInOrder, multiGrouping);
-        fireEvent(new GroupByEvent(groupByInOrder));
+        fireEvent(new GroupByEvent().setModifiers(groupByInOrder));
         table.resetScrollTo(0d);
         table.groupBy.resetScrollTo(0d);
     }

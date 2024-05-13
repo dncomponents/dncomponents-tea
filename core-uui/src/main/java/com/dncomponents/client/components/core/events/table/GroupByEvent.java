@@ -28,12 +28,11 @@ import org.teavm.jso.dom.events.Event;
 import java.util.LinkedHashSet;
 
 
-public class GroupByEvent extends AbstractModifierEvent<GroupByEvent.GroupByHandler> {
+public class GroupByEvent extends AbstractModifierEvent {
 
-    public GroupByEvent(LinkedHashSet<HeaderGrouping> modifiers) {
-        super(GroupByHandler.TYPE, modifiers);
+    public GroupByEvent() {
+        super(GroupByHandler.TYPE);
     }
-
 
     @Override
     public LinkedHashSet<HeaderGrouping> getModifiers() {

@@ -29,10 +29,10 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class FilterEvent extends AbstractModifierEvent<FilterEvent.FilterHandler> {
+public class FilterEvent extends AbstractModifierEvent {
 
-    public FilterEvent(Collection<HeaderFiltering> modifiers) {
-        super(FilterHandler.TYPE, modifiers);
+    public FilterEvent() {
+        super(FilterHandler.TYPE);
     }
 
     @Override

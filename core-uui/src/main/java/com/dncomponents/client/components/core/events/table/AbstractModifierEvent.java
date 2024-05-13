@@ -23,13 +23,17 @@ import com.dncomponents.client.dom.handlers.BaseEventListener;
 
 import java.util.Collection;
 
-public abstract class AbstractModifierEvent<H extends BaseEventListener> extends BaseEvent {
+public abstract class AbstractModifierEvent extends BaseEvent {
 
-    protected final Collection<? extends HeaderWithModifiers> modifiers;
+    protected  Collection<? extends HeaderWithModifiers> modifiers;
 
-    protected AbstractModifierEvent(String type, Collection<? extends HeaderWithModifiers> modifiers) {
+    protected AbstractModifierEvent(String type) {
         super(type);
+    }
+
+    public AbstractModifierEvent setModifiers(Collection<? extends HeaderWithModifiers> modifiers) {
         this.modifiers = modifiers;
+        return this;
     }
 
     public Collection<? extends HeaderWithModifiers> getModifiers() {

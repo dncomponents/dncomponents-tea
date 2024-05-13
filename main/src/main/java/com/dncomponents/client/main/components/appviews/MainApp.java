@@ -43,8 +43,12 @@ import com.dncomponents.client.views.IsElement;
 import com.dncomponents.client.views.appview.AcceptsOneElement;
 import com.dncomponents.client.views.appview.PlaceManager;
 import org.teavm.jso.JSBody;
+import org.teavm.jso.browser.Window;
+import org.teavm.jso.dom.html.HTMLDocument;
 import org.teavm.jso.dom.html.HTMLElement;
+import org.teavm.jso.dom.xml.Element;
 import org.teavm.jso.dom.xml.Node;
+import org.teavm.jso.dom.xml.NodeList;
 
 
 public class MainApp implements AcceptsOneElement {
@@ -92,10 +96,9 @@ public class MainApp implements AcceptsOneElement {
     public void setElement(IsElement element) {
         contentWrapper.setInnerHTML("");
         contentWrapper.appendChild(element.asElement());
-        AbstractCellComponent.resetScrollOnPage(contentWrapper);
+//        AbstractCellComponent.resetScrollOnPage(contentWrapper);
         prettyPrint();
     }
-
 
     public Node asNode() {
         return binder.asNode();

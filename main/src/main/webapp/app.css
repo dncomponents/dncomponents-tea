@@ -1,24 +1,6 @@
 /* Generated css file */
 
 
-/* AttributesComponent */
-
-        .someCss{
-          background:    #2ce3c1;
-        }
-
-/* ConditionalComponent */
-
-        .otherCss{
-          background: blue;
-        }
-
-/* EventsComponent */
-
-.eventsClass {
-    background: lightgray;
-}
-
 /* MainApp */
 
 .main-title{
@@ -33,3 +15,21 @@
            padding: 20px;
            border: 1px solid gray;
          }
+
+/* AttributesComponent */
+
+        .someCss{
+          background:    #2ce3c1;
+        }
+
+/* EventsComponent */
+
+.eventsClass {
+    background: lightgray;
+}
+
+/* ConditionalComponent */
+
+        .otherCss{
+          background: blue;
+        }

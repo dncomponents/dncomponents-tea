@@ -12,10 +12,10 @@
         <outputRelativeToContentRoot value="true" />
         <module name="core-cell" />
         <module name="core" />
-        <module name="template_annotation_processor" />
         <module name="coreuui" />
-        <module name="core-uui" />
         <module name="mvp" />
+        <module name="template_annotation_processor" />
+        <module name="core-uui" />
       </profile>
       <profile name="Annotation profile for material-ui" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -34,6 +34,16 @@
         <option name="src" value="$PROJECT_DIR$/main/src/main/java" />
         <processor name="com.dncomponents.TemplateProcessor" />
         <module name="main" />
+      </profile>
+      <profile name="Annotation profile for main-reactive" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <option name="cssDir" value="$PROJECT_DIR$/main-reactive/src/main/webapp" />
+        <option name="register" value="AppTemplates" />
+        <option name="src" value="$PROJECT_DIR$/main-reactive/src/main/java" />
+        <processor name="com.dncomponents.TemplateProcessor" />
+        <module name="main-reactive" />
       </profile>
       <profile name="Annotation profile for dn-components" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -65,6 +75,7 @@
       <module name="create-project" options="" />
       <module name="main" options="-Asrc=$PROJECT_DIR$/main/src/main/java -AcssDir=$PROJECT_DIR$/main/src/main/webapp -Aregister=AppTemplates" />
       <module name="main-material" options="-Aregister=MaterialAppTemplates" />
+      <module name="main-reactive" options="-Asrc=$PROJECT_DIR$/main-reactive/src/main/java -AcssDir=$PROJECT_DIR$/main-reactive/src/main/webapp -Aregister=AppTemplates" />
       <module name="material-ui" options="-Aregister=MaterialTemplates" />
       <module name="material-ui-cell" options="-Aregister=MaterialCellTemplates" />
       <module name="template_annotation_processor" options="" />

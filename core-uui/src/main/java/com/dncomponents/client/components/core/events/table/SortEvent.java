@@ -28,10 +28,10 @@ import org.teavm.jso.dom.events.Event;
 import java.util.LinkedHashSet;
 
 
-public class SortEvent extends AbstractModifierEvent<SortEvent.SortHandler> {
+public class SortEvent extends AbstractModifierEvent {
 
-    public SortEvent(LinkedHashSet<HeaderSorting> modifiers) {
-        super(SortHandler.TYPE, modifiers);
+    public SortEvent() {
+        super(SortHandler.TYPE);
     }
 
 

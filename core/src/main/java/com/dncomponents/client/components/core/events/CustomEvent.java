@@ -31,6 +31,6 @@ public abstract class CustomEvent implements Event {
     public static native CustomEvent createCustomEvent(String type, Options options);
 
     @JSBody(params = {"type", "detail"}, script = "return new CustomEvent(type, {detail:detail});")
-    public static native CustomEvent createCustomEvent(String type, JSObject detail);
+    public static native CustomEvent createCustomEvent(String type, Object detail);
 
 }

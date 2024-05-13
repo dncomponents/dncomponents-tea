@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package com.dncomponents.client.components.core.events;
+package com.dncomponents.client.reactive;
+
+import com.dncomponents.client.components.core.AppTemplates;
+import com.dncomponents.client.components.core.HtmlBinder;
+import org.teavm.jso.dom.html.HTMLDocument;
 
 
-import org.teavm.jso.JSObject;
+public class Client {
 
-public abstract class BaseEvent implements IsEvent {
-    protected CustomEvent customEvent;
-
-    public BaseEvent(String type) {
-        customEvent = CustomEvent.createCustomEvent(type, this);
+    public static void main(String[] args) {
+        AppTemplates.register();
+        MainApp mainApp = new MainApp();
+        HTMLDocument.current().getBody().appendChild(mainApp.asElement());
     }
 
-    @Override
-    public CustomEvent asEvent() {
-        return customEvent;
-    }
 }

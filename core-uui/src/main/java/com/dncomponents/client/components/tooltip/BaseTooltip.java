@@ -18,6 +18,7 @@ package com.dncomponents.client.components.tooltip;
 
 import com.dncomponents.client.components.core.BaseComponent;
 import com.dncomponents.client.components.core.events.HandlerRegistration;
+import com.dncomponents.client.components.popover.Popper;
 import com.dncomponents.client.dom.DomUtil;
 import com.dncomponents.client.dom.handlers.*;
 import com.dncomponents.client.views.core.EnumLookUp;
@@ -45,7 +46,7 @@ public abstract class BaseTooltip<T, C extends TooltipView> extends BaseComponen
     protected Trigger trigger = Trigger.HOVER;
     private HTMLElement owner;
     private boolean showing;
-    //    private Popper popper;
+    private Popper popper;
     private boolean focused;
     private List<HandlerRegistration> handlers = new ArrayList<>();
 
@@ -63,12 +64,10 @@ public abstract class BaseTooltip<T, C extends TooltipView> extends BaseComponen
     }
 
     private void addAndShow() {
-//        DomUtil.addToBody(this);
-//        Popper.Defaults def = Popper.Defaults.create();
-//        def.setPlacement(orientation.name().toLowerCase());
-//        popper = new Popper(owner, BaseTooltip.this.asElement(), def);
-//        popper.update();
-//        showing = true;
+        DomUtil.addToBody(this);
+        popper = new Popper(owner, BaseTooltip.this.asElement(), orientation.name().toLowerCase());
+        popper.update();
+        showing = true;
         updatePosition();
     }
 
