@@ -56,7 +56,7 @@ To debug follow instruction on [teavm tooling section](https://teavm.org/docs/to
 
 
 ## Contact
-Join [gitter chanel](https://gitter.im/dncomponents_/dncomponents) <br>
+Join gitter room https://app.gitter.im/#/room/#dncomponents.com:gitter.im<br>
 support@dncomponents.com
 
 ## License
