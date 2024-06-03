@@ -30,7 +30,6 @@ import org.teavm.jso.dom.html.HTMLElement;
                   <h1>Person component</h1>
                   <p>{{props.getPerson().getName()}}</p>
                   <p>{{props.getPerson().getAge()}}</p>
-        //          <p>{{props.getPerson().getGender()}}</p>
                   <p>Some numb: {{props.getSomeNumb()}}</p>
                   <p>Color: {{props.getColor()}}</p>
                 </div>

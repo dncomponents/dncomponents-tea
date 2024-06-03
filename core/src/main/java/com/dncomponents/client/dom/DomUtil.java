@@ -1356,7 +1356,7 @@ public class DomUtil {
     }
 
     public static void fireCustomEvent(HTMLElement element, String type, Object detail) {
-        CustomEvent customEvent = CustomEvent.createCustomEvent(type, (JSObject) detail);
+        CustomEvent customEvent = CustomEvent.createCustomEvent(type, detail);
         element.dispatchEvent(customEvent);
     }
 
@@ -1384,7 +1384,17 @@ public class DomUtil {
         }
     }
 
-    public static void checkBoxSelection(EventTarget eventTarget, Collection<String> selection) {
+    public static <T> T checkBoxSelection(Object obj, Event e) {
+        if (obj instanceof Collection) {
+            return (T) DomUtil.checkBoxCollectionSelection(e.getTarget(), (Collection<String>) obj);
+        } else if (obj instanceof Boolean) {
+            return (T) (Boolean.valueOf(((HTMLInputElement) e.getTarget()).isChecked()));
+        }else{
+            return (T) ((HTMLInputElement) e.getTarget()).getValue();
+        }
+    }
+
+    private static Collection<String> checkBoxCollectionSelection(EventTarget eventTarget, Collection<String> selection) {
         HTMLInputElement element = (HTMLInputElement) eventTarget;
         String value = element.getValue();
         boolean containsIgnoreCase = selection.stream()
@@ -1396,6 +1406,7 @@ public class DomUtil {
         } else {
             selection.removeIf(str -> str.equalsIgnoreCase(value));
         }
+        return selection;
     }
 
     //call method that is missing with arguments

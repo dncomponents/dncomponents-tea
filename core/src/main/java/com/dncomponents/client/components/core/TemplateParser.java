@@ -29,8 +29,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static com.dncomponents.client.dom.DomUtil.fireCustomEvent;
-
 
 public class TemplateParser {
 
@@ -55,6 +53,7 @@ public class TemplateParser {
     private String templateContent;
     String clazz = "";
     private HTMLElement rootElement;
+    private TemplateParser parentParser;
 
     public TemplateParser(HTMLTemplateElement templateElement) {
         this.templateElement = templateElement;
@@ -73,6 +72,12 @@ public class TemplateParser {
         this.templateContent = templateContent;
         if (init) init();
     }
+
+    public TemplateParser(HTMLTemplateElement templateElement, TemplateParser parser) {
+        this(templateElement);
+        this.parentParser = parser;
+    }
+
 
     public void init() {
         if (templateElement == null)
@@ -400,13 +405,10 @@ public class TemplateParser {
                     final String[] split = attr.getName().split("-");
                     String value = attr.getValue();
                     eventsToRemove.add(value);
-                    String name = attr.getName();
                     if (value != null) {
                         ((HTMLElement) at).addEventListener(split[2], evt -> {
                             if (eventHandlers.get(value) != null) {
                                 eventHandlers.get(value).accept(evt);
-                                //updateAll(); todo ?
-                                fireCustomEvent((HTMLElement) at, "update", "updated");
                             }
                         });
                     }
@@ -414,9 +416,7 @@ public class TemplateParser {
                 eventsToRemove.stream().forEach(s -> at.removeAttribute(s));
             }
             if (at.hasAttribute("dn-model")) {
-//                final String modelAttribute = at.getAttribute("dn-model");
                 final String model = at.getAttribute("dn-model");
-//                final String model = getBetween(modelAttribute);
 
                 if (at.getTagName().equalsIgnoreCase("textarea") && model != null) {
                     ((HTMLTextAreaElement) at).addEventListener("input", evt -> {
@@ -424,7 +424,6 @@ public class TemplateParser {
                         if (eventConsumer != null) {
                             eventConsumer.accept(evt);
                             updateAll();
-                            fireCustomEvent((HTMLElement) at, "update", "updated");
                         }
                     });
                 } else if (at.getTagName().equalsIgnoreCase("select") && model != null) {
@@ -432,8 +431,7 @@ public class TemplateParser {
                         final Consumer<Event> eventConsumer = eventHandlers.get("select:" + model);
                         if (eventConsumer != null) {
                             eventConsumer.accept(evt);
-                            updateAll(); //todo update only field?
-                            fireCustomEvent((HTMLElement) at, "update", "updated");
+                            updateAll();
                         }
                     });
                     multiMapValueElements.put(model, new SelectElement((HTMLElement) at));
@@ -447,11 +445,12 @@ public class TemplateParser {
                     ((HTMLInputElement) at).addEventListener("change", evt -> {
                         final Consumer<Event> eventConsumer = eventHandlers.get("radio:" + model);
                         if (eventConsumer != null) {
-                            Console.log("------------ " + ((HTMLInputElement) evt.getTarget()).getValue());
-
                             eventConsumer.accept(evt);
-                            updateAll();
-                            fireCustomEvent((HTMLElement) at, "update", "updated");
+                            if (parentParser != null) {
+                                parentParser.updateAll();
+                            } else {
+                                updateAll();
+                            }
                         }
                     });
 
@@ -461,7 +460,6 @@ public class TemplateParser {
                         if (eventConsumer != null) {
                             eventConsumer.accept(evt);
                             updateAll();
-                            fireCustomEvent((HTMLElement) at, "update", "updated");
                         }
                     });
                     multiMapValueElements.put(model, new InputElement((HTMLElement) at));
@@ -539,7 +537,7 @@ public class TemplateParser {
         }
     }
 
-    public void updateAll(boolean exclude, String... fields) {
+    public void updateAll(boolean exclude, boolean force, String... fields) {
         for (State state : states) {
             boolean shouldUpdate = exclude;
             for (String field : fields) {
@@ -550,7 +548,11 @@ public class TemplateParser {
             }
             if (shouldUpdate) {
                 state.setValue();
-                state.updateUI();
+                if (force) {
+                    state.forceUpdateUI();
+                } else {
+                    state.updateUI();
+                }
             }
         }
     }
@@ -562,6 +564,7 @@ public class TemplateParser {
     private Map<String, Map<String, Function>> allLoopsFunctionsMap = new HashMap<>();
     Map<String, Map<String, BiConsumer>> allLoopEventsHandlers = new HashMap<>();
     Object loopValue;
+    Integer loopValueRow;
     String loopName;
     Map<String, Function> loopFunctions = new HashMap<>();
 
@@ -579,6 +582,12 @@ public class TemplateParser {
         }
     }
 
+    public State createOrGetState(String stateName, Supplier supplier) {
+        if (!getStateOptional(stateName).isPresent()) {
+            states.add(new State(stateName, supplier, this));
+        }
+        return getState(stateName);
+    }
 
     abstract class AbstractElementValue implements UpdateUi {
         HTMLElement element;
@@ -620,9 +629,15 @@ public class TemplateParser {
                     final Boolean b = (Boolean) valueFromStates;
                     if (b) {
                         DomUtil.setVisible(ifElseElement.getB(), b);
+                        if (ifElseElement.getB().hasAttribute("dn-on-dnshow")) {
+                            DomUtil.fireCustomEvent(ifElseElement.getB(), "dnshow", b);
+                        }
                         found = true;
                     } else {
                         DomUtil.setVisible(ifElseElement.getB(), b);
+                        if (ifElseElement.getB().hasAttribute("dn-on-dnhide")) {
+                            DomUtil.fireCustomEvent(ifElseElement.getB(), "dnhide", b);
+                        }
                     }
                 }
             }
@@ -811,9 +826,6 @@ public class TemplateParser {
         LoopElement(Element element, String valueName, String collectionName) {
             this.valueName = valueName;
             this.element = (HTMLElement) element;
-            if (element instanceof HTMLTemplateElement) { //todo
-                isTemplate = true;
-            }
             if (element.getTagName().equalsIgnoreCase("template")) {
                 isTemplate = true;
             }
@@ -822,11 +834,24 @@ public class TemplateParser {
             this.element.setInnerHTML("");
         }
 
+        List listOfCollection;
+
         public void loop(Collection collection) {
+            this.listOfCollection = new ArrayList(collection);
+            if (!collection.isEmpty() && collection.size() == loopItemsParsers.size()) {
+                for (TemplateParser parser : loopItemsParsers) {
+                    parser.updateAll();
+                }
+                return;
+            }
+            loopItemsParsers.clear();
             this.element.setInnerHTML("");
             fragment = (DocumentFragment) HTMLDocument.current().createDocumentFragment();
-            for (Object o : collection) {
-                updateValue(o);
+            for (int i = 0; i < collection.size(); i++) {
+                updateValue(i);
+            }
+            if (collection.isEmpty()) {
+                fragment.appendChild(HTMLDocument.current().createElement("template"));
             }
             if (isTemplate) {
                 if (element.getParentNode() != null) {
@@ -873,30 +898,40 @@ public class TemplateParser {
             return list;
         }
 
-        private void setStates(Map<String, Function> functions, Object value, TemplateParser parser) {
+        private void setStates(Map<String, Function> functions, int row, TemplateParser parser) {
             if (functions != null) {
                 for (Map.Entry<String, Function> entry : functions.entrySet()) {
                     final String key = entry.getKey();
-                    final Object v = entry.getValue().apply(value);
+                    final Object v = entry.getValue().apply(listOfCollection.get(row));
                     if (v instanceof Collection) {
                         final Map childLoopFunctionsMap = allLoopsFunctionsMap.get(key);
                         if (childLoopFunctionsMap != null) {
                             parser.setLoopStateFunctions(key, childLoopFunctionsMap);
                         }
                     }
-                    parser.addStateFunction(key, () -> entry.getValue().apply(value));
+                    parser.addStateFunction(key, new Supplier() {
+                        @Override
+                        public Object get() {
+                            return entry.getValue().apply(listOfCollection.get(row));
+                        }
+                    });
+//                    parser.addStateFunction("index", () -> row);//todo add row number, solve nested row numbers
                 }
             }
         }
 
-        private void updateValue(Object value) {
-            TemplateParser parser = new TemplateParser(templateElement);
-            parser.loopValue = value;
+        List<TemplateParser> loopItemsParsers = new ArrayList<>();
+
+        private void updateValue(int row) {
+            TemplateParser parser = new TemplateParser(templateElement, TemplateParser.this);
+            loopItemsParsers.add(parser);
+            parser.loopValue = listOfCollection.get(row);
+            parser.loopValueRow = row;
             parser.loopName = collectionName;
             parser.loopFunctions = allLoopsFunctionsMap.get(collectionName);
-            setStates(parser.loopFunctions, value, parser);
+            setStates(parser.loopFunctions, row, parser);
             if (loopName != null && loopValue != null) {
-                setStates(loopFunctions, loopValue, parser);
+                setStates(loopFunctions, loopValueRow, parser);
             }
             parser.allLoopEventsHandlers = allLoopEventsHandlers;
             final Map<String, BiConsumer> loopHandlers = allLoopEventsHandlers.get(collectionName);
@@ -904,7 +939,7 @@ public class TemplateParser {
             if (loopHandlers != null) {
                 for (Map.Entry<String, BiConsumer> entry : loopHandlers.entrySet()) {
                     final String key = entry.getKey();
-                    parser.addEventHandler(key, event -> entry.getValue().accept(event, value));
+                    parser.addEventHandler(key, event -> entry.getValue().accept(event, listOfCollection.get(row)));
                 }
             }
             parser.init();

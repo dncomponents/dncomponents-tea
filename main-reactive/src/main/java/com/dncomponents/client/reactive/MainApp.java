@@ -36,6 +36,7 @@ import java.util.List;
                 <option>AttributesComponent</option>
                 <option>LoopComponent</option>
                 <option>ValuesBindingComponent</option>
+                <option>TodoComponent</option>
             </select>
             <hello-component dn-if='currentScreens.contains("HelloComponent")'></hello-component>
             <UserInputComponent dn-if='currentScreens.contains("UserInputComponent")'></UserInputComponent>
@@ -43,6 +44,7 @@ import java.util.List;
             <EventsComponent dn-if='currentScreens.contains("EventsComponent")'></EventsComponent>
             <LoopComponent dn-if='currentScreens.contains("LoopComponent")'></LoopComponent>
             <ValuesBindingComponent dn-if='currentScreens.contains("ValuesBindingComponent")'></ValuesBindingComponent>
+            <TodoComponent dn-if='currentScreens.contains("TodoComponent")'></TodoComponent>
         </div>
         """,
         //language=css
@@ -55,7 +57,7 @@ import java.util.List;
 )
 public class MainApp implements IsElement {
     HtmlBinder<MainApp> binder = HtmlBinder.create(MainApp.class, this);
-    List<String> currentScreens = new ArrayList<>(Arrays.asList("HelloComponent"));
+    List<String> currentScreens = new ArrayList<>(Arrays.asList("TodoComponent"));
 
     public MainApp() {
         binder.bindAndUpdateUi();

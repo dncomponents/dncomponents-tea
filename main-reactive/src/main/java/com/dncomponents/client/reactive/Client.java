@@ -17,7 +17,6 @@
 package com.dncomponents.client.reactive;
 
 import com.dncomponents.client.components.core.AppTemplates;
-import com.dncomponents.client.components.core.HtmlBinder;
 import org.teavm.jso.dom.html.HTMLDocument;
 
 

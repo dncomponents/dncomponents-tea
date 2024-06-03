@@ -12,10 +12,10 @@
         <outputRelativeToContentRoot value="true" />
         <module name="core-cell" />
         <module name="core" />
-        <module name="coreuui" />
-        <module name="mvp" />
         <module name="template_annotation_processor" />
+        <module name="coreuui" />
         <module name="core-uui" />
+        <module name="mvp" />
       </profile>
       <profile name="Annotation profile for material-ui" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />

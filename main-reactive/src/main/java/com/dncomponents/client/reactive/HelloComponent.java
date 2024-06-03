@@ -24,17 +24,17 @@ import org.teavm.jso.dom.html.HTMLElement;
 //language=html
 @Component(template = """
         <div class='helloCss'>
-        <h2>*** HelloComponent ***</h2>
-          <h1>Hello, {{name}}!</h1>
+            <h2>*** HelloComponent ***</h2>
+            <h1>Hello, {{name}}!</h1>
         </div>
         """,
 //language=css
         css = """
-                .helloCss{
-                           background: #e69ff1;
-                           padding: 20px;
-                           border: 1px solid gray;
-                         }
+                .helloCss {
+                    background: #43e317;
+                    padding: 20px;
+                    border: 1px solid gray;
+                }
                 """,
         tag = "hello-component"
 )

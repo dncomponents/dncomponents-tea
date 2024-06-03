@@ -23,12 +23,24 @@ import com.dncomponents.client.testing.TestingHelper;
 import com.dncomponents.client.views.IsElement;
 import org.teavm.jso.dom.html.HTMLElement;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 //language=html
 @Component(template = """
         <div>
-            <h2>Loop in table</h2>
+            <h2>Loops</h2>
+            <h3>Sorting</h3>
+            <button dn-on-click='sort()'>Sort asc/desc</button>
+            <button dn-on-click='add()'>Add</button>
+            <button dn-on-click='remove()'>Remove</button>
+            <ul>
+                <template dn-loop='person in persons'>
+                    <li>{{person.getName()}} - {{getPersonIndex(person)}}</li>
+                </template>
+            </ul>
+            <h3>Table</h3>
             <table>
                 <thead>
                 <tr>
@@ -49,26 +61,69 @@ import java.util.List;
                 </template>
                 </tbody>
             </table>
-            <h2>Loop in list</h2>
-            <ul dn-loop='person 1in persons'>
+            <h3>List</h3>
+            <ul dn-loop='person in persons'>
                 <li>{{person.getName()}}</li>
             </ul>
-            <h2>Loop components in list</h2>
+                
+            <h3>Function call out of loop</h3>
+            <ul dn-loop='person in getPersons()'>
+                <li>{{getText()}}</li>
+                <li>{{person.getName()}}</li>
+            </ul>
+            <h3>Component in loop</h3>
             <ul dn-loop='person in persons'>
                 <PersonComponent person='{{person}}' color='red'></PersonComponent>
             </ul>
         </div>
         """)
 public class LoopComponent implements IsElement {
+
     HtmlBinder<LoopComponent> binder = HtmlBinder.create(LoopComponent.class, this);
+
     List<Person> persons = TestingHelper.getPeople(10);
 
     public LoopComponent() {
         binder.bindAndUpdateUi();
     }
 
+    List<Person> getPersons() {
+        return persons;
+    }
+
+    String getText() {
+        return "Success";
+    }
+
+    boolean sorted = false;
+
+    void sort() {
+        if (!sorted) {
+            Collections.sort(persons, Comparator.comparing(Person::getName));
+        } else {
+            Collections.reverse(persons);
+        }
+        sorted = !sorted;
+        binder.updateUi();
+    }
+
+    void add() {
+        persons.add(TestingHelper.getPeople(1).get(0));
+        binder.updateUi();
+    }
+
+    void remove() {
+        persons.remove(0);
+        binder.updateUi();
+    }
+
+    int getPersonIndex(Person person) {
+        return persons.indexOf(person);
+    }
+
     @Override
     public HTMLElement asElement() {
         return binder.getRoot();
     }
+
 }
